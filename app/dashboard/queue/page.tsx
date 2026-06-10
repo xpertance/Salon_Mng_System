@@ -672,6 +672,17 @@ export default function QueueManagement() {
     }
   }, []);
 
+  // Listen for real-time refresh events
+  useEffect(() => {
+    const handleRefresh = () => {
+      if (salon && salon._id) {
+        loadQueue(salon._id);
+      }
+    };
+    window.addEventListener('refreshQueue', handleRefresh);
+    return () => window.removeEventListener('refreshQueue', handleRefresh);
+  }, [salon]);
+
   async function loadQueue(id: string) {
     try {
       const res = await fetch(`/api/queue/list?id=${id}`, {

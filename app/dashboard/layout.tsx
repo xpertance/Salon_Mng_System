@@ -4,6 +4,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
+import { useBookingsSync } from "@/hooks/useBookingsSync";
 import {
   LayoutDashboard,
   Scissors,
@@ -37,6 +38,20 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const [allowed, setAllowed] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [salon, setSalon] = useState<any>(null);
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [notifications, setNotifications] = useState<any[]>([]);
+
+  // Initialize real-time booking synchronization
+  useBookingsSync(salon?._id);
+
+  // Listen for new booking notifications
+  useEffect(() => {
+    const handleNewNotification = (e: any) => {
+      setNotifications(prev => [e.detail, ...prev].slice(0, 10)); // Keep last 10
+    };
+    window.addEventListener('newBookingNotification', handleNewNotification);
+    return () => window.removeEventListener('newBookingNotification', handleNewNotification);
+  }, []);
 
   useEffect(() => {
     async function check() {
@@ -148,10 +163,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           {/* Logo */}
           <div className="flex items-center justify-between p-6 border-b border-slate-200">
             <Link href="/dashboard" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">S</span>
+              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center overflow-hidden p-0.5">
+                <img src="/salon_logo.png" alt="Innonsh Salonza Logo" className="w-full h-full object-contain" />
               </div>
-              <span className="text-xl font-bold text-slate-900">TrimSetGo</span>
+              <span className="text-xl font-bold text-slate-900">Innonsh Salonza</span>
             </Link>
             <button
               onClick={() => setSidebarOpen(false)}
@@ -244,10 +259,53 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
               <div className="flex items-center space-x-4 ml-4">
                 {/* Notifications */}
-                <button className="p-2 rounded-lg hover:bg-slate-100 relative">
-                  <Bell className="w-5 h-5 text-slate-600" />
-                  <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                </button>
+                <div className="relative">
+                  <button 
+                    onClick={() => setShowNotifications(!showNotifications)}
+                    className="p-2 rounded-lg hover:bg-slate-100 relative"
+                  >
+                    <Bell className="w-5 h-5 text-slate-600" />
+                    {notifications.length > 0 && (
+                      <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                    )}
+                  </button>
+
+                  {/* Notification Dropdown */}
+                  {showNotifications && (
+                    <div className="absolute right-0 mt-2 w-72 max-h-96 overflow-y-auto bg-white rounded-xl shadow-lg border border-slate-200 z-50">
+                      <div className="px-4 py-3 border-b border-slate-200 sticky top-0 bg-white z-10 flex justify-between items-center">
+                        <h3 className="font-semibold text-slate-900">Notifications</h3>
+                        {notifications.length > 0 && (
+                          <button 
+                            onClick={() => setNotifications([])} 
+                            className="text-xs text-purple-600 hover:text-purple-700 font-medium"
+                          >
+                            Clear
+                          </button>
+                        )}
+                      </div>
+                      
+                      {notifications.length === 0 ? (
+                        <div className="p-4 text-center">
+                          <Bell className="w-8 h-8 text-slate-300 mx-auto mb-2" />
+                          <p className="text-sm font-medium text-slate-600">No new notifications</p>
+                          <p className="text-xs text-slate-400 mt-1">You're all caught up!</p>
+                        </div>
+                      ) : (
+                        <div className="flex flex-col">
+                          {notifications.map((notif, idx) => (
+                            <div key={idx} className="p-3 border-b border-slate-100 hover:bg-slate-50 last:border-0">
+                              <p className="text-sm text-slate-800">{notif.message}</p>
+                              <p className="text-[10px] text-slate-400 mt-1">
+                                {new Date(notif.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>

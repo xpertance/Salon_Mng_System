@@ -113,7 +113,7 @@
 //                                 <div className="flex items-center gap-3 mb-4">
 //                                     <div className="w-10 h-10 bg-indigo-500 rounded-xl flex items-center justify-center text-sm font-black">TSG</div>
 //                                     <div>
-//                                         <div className="font-black text-xs">TrimSetGo (via {campaignType.toUpperCase()})</div>
+//                                         <div className="font-black text-xs">Innonsh Salonza (via {campaignType.toUpperCase()})</div>
 //                                         <div className="text-[8px] text-white/50 font-bold uppercase">Today • 10:30 AM</div>
 //                                     </div>
 //                                 </div>
@@ -296,7 +296,7 @@ export default function MarketingPage() {
                                         TSG
                                     </div>
                                     <div>
-                                        <div className="text-xs font-semibold">TrimSetGo Salon</div>
+                                        <div className="text-xs font-semibold">Innonsh Salonza Salon</div>
                                         <div className="text-[10px] text-white/50">via {campaignType.toUpperCase()} • Just now</div>
                                     </div>
                                 </div>

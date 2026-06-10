@@ -57,6 +57,17 @@ export default function BookingsPage() {
     filterBookings();
   }, [searchTerm, statusFilter, dateFilter, bookings]);
 
+  // Listen for real-time refresh events
+  useEffect(() => {
+    const handleRefresh = () => {
+      if (salon && salon._id) {
+        loadBookings(salon._id);
+      }
+    };
+    window.addEventListener('refreshBookings', handleRefresh);
+    return () => window.removeEventListener('refreshBookings', handleRefresh);
+  }, [salon]);
+
   async function loadBookings(id: string) {
     setLoading(true);
     try {

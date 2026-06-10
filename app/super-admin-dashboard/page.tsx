@@ -62,7 +62,7 @@ export default function SuperAdminDashboard() {
     if (loading && !stats) return <div className="p-20 text-center font-black uppercase tracking-widest text-slate-300">Loading Intelligence...</div>;
 
     return (
-        <div className="min-h-screen bg-slate-950 text-white p-6 lg:p-10 font-sans">
+        <div className="min-h-screen bg-slate-950 text-white p-6 lg:p-10 ">
             <div className="max-w-7xl mx-auto space-y-10">
 
                 {/* Top Bar */}

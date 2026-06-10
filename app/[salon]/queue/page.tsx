@@ -293,7 +293,7 @@ export default async function QueuePage({ params }: any) {
           <p className="text-center text-sm text-slate-600">
             Powered by{" "}
             <Link href="/" className="font-semibold text-purple-600 hover:text-purple-700">
-              TrimSetGo
+              Innonsh Salonza
             </Link>
           </p>
         </div>
