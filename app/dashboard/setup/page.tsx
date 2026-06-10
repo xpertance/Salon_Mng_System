@@ -118,8 +118,8 @@ export default function SalonSetupPage() {
           <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-600 rounded-xl mb-6 shadow-lg">
             <Store className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-2xl font-semibold text-slate-900">
-            Welcome to TrimSetGo! 🎉
+          <h1 className="text-4xl font-bold text-slate-900 mb-3">
+            Welcome to Innonsh Salonza! 🎉
           </h1>
           <p className="mt-1 text-sm text-slate-600">
             Let's set up your salon in just a few steps for your salon

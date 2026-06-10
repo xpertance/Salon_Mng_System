@@ -1,48 +1,58 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { ToastProvider } from "@/components/ui/Toast";
 
-const inter = Inter({ subsets: ["latin"] });
+const googleSans = localFont({
+  src: [
+    { path: '../Google_Sans/static/GoogleSans-Regular.ttf', weight: '400', style: 'normal' },
+    { path: '../Google_Sans/static/GoogleSans-Italic.ttf', weight: '400', style: 'italic' },
+    { path: '../Google_Sans/static/GoogleSans-Medium.ttf', weight: '500', style: 'normal' },
+    { path: '../Google_Sans/static/GoogleSans-SemiBold.ttf', weight: '600', style: 'normal' },
+    { path: '../Google_Sans/static/GoogleSans-Bold.ttf', weight: '700', style: 'normal' },
+    { path: '../Google_Sans/static/GoogleSans-BoldItalic.ttf', weight: '700', style: 'italic' },
+  ],
+  variable: '--font-google-sans',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
-  title: "TrimSetGo - Smart Salon Management System",
+  title: "Innonsh Salonza | Smart Salon Management Platform",
   description:
-    "TrimSetGo is a modern salon, spa & beauty parlour management system — automated bookings, real-time queue, multi-service appointments, staff management & complete business insights.",
+    "Innonsh Salonza is the intelligent platform that runs your entire salon: appointments, billing, inventory, staff, marketing, and analytics from one unified dashboard.",
   keywords: [
+    "salon software",
     "salon management",
-    "beauty parlour software",
-    "spa management",
-    "salon booking app",
-    "queue management system",
-    "barber shop software",
-    "salon CRM",
     "salon POS",
+    "appointment booking",
+    "salon CRM",
+    "salon analytics",
+    "salon inventory",
   ],
   icons: {
     icon: "/logo.svg", // Favicon path
     shortcut: "/logo.svg",
     apple: "/logo.svg",
   },
-  metadataBase: new URL("https://trimsetgo.in"), // Replace with your actual domain
+  metadataBase: new URL("https://trimsetgo.in"), // Assuming domain remains same or update if needed
 
   alternates: {
     canonical: "https://trimsetgo.in",
   },
 
   openGraph: {
-    title: "TrimSetGo - Smart Salon Management System",
+    title: "Innonsh Salonza | Smart Salon Management Platform",
     description:
-      "Automate your salon with TrimSetGo: bookings, queue system, multi-service appointments, staff management & growth insights.",
+      "Automate appointments, billing, inventory, staff, and customer engagement from one intelligent dashboard.",
     url: "https://trimsetgo.in",
-    siteName: "TrimSetGo",
+    siteName: "Innonsh Salonza",
     images: [
       {
         url: "/logo.svg",
         width: 600,
         height: 600,
-        alt: "TrimSetGo Logo",
+        alt: "Innonsh Salonza Logo",
       },
     ],
     locale: "en_IN",
@@ -51,13 +61,13 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "TrimSetGo - Smart Salon Management System",
+    title: "Innonsh Salonza | Smart Salon Management Platform",
     description:
       "An all-in-one booking & queue automation system for salons, spas & beauty parlours.",
     images: ["/logo.png"],
   },
 
-  applicationName: "TrimSetGo",
+  applicationName: "Innonsh Salonza",
 };
 
 // Viewport configuration (Next.js 14+)
@@ -75,7 +85,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={inter.className}>
+      <body className={`${googleSans.className} antialiased`}>
         <ToastProvider>
           <AuthProvider>{children}</AuthProvider>
         </ToastProvider>

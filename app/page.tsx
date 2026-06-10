@@ -1,28 +1,38 @@
-import Hero from '@/components/landing/Hero';
-import PainPointsSection from '@/components/landing/PainPointsSection';
-import FeaturesSection from '@/components/landing/FeaturesSection';
-import ScreenshotsSection from '@/components/landing/ScreenshotsSection';
-import ValuePropositionSection from '@/components/landing/ValuePropositionSection';
-import PricingSection from '@/components/landing/PricingSection';
-import TestimonialsSection from '@/components/landing/TestimonialsSection';
-import FAQSection from '@/components/landing/FAQSection';
-import CTASection from '@/components/landing/CTASection';
-import Footer from '@/components/landing/Footer';
+import './landing.css';
 import Navbar from '@/components/landing/Navbar';
+import MobileMenu from '@/components/landing/MobileMenu';
+import Hero from '@/components/landing/Hero';
+import Logos from '@/components/landing/Logos';
+import Problem from '@/components/landing/Problem';
+import Solution from '@/components/landing/Solution';
+import Modules from '@/components/landing/Modules';
+import Experience from '@/components/landing/Experience';
+import Roles from '@/components/landing/Roles';
+import Impact from '@/components/landing/Impact';
+import HowItWorks from '@/components/landing/HowItWorks';
+import Testimonials from '@/components/landing/Testimonials';
+import CTA from '@/components/landing/CTA';
+import Footer from '@/components/landing/Footer';
+import GSAPWrapper from '@/components/landing/GSAPWrapper';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen">
       <Navbar />
-      <Hero />
-      <PainPointsSection />
-      <FeaturesSection />
-      <ScreenshotsSection />
-      <ValuePropositionSection />
-      <PricingSection />
-      <TestimonialsSection />
-      <FAQSection />
-      <CTASection />
+      <MobileMenu />
+      <GSAPWrapper>
+        <Hero />
+        <Logos />
+        <Problem />
+        <Solution />
+        <Modules />
+        <Experience />
+        <Roles />
+        <Impact />
+        <HowItWorks />
+        <Testimonials />
+        <CTA />
+      </GSAPWrapper>
       <Footer />
     </main>
   );

@@ -24,8 +24,8 @@ async function handler(req: Request) {
       return NextResponse.json({ success: false, message: "New password is required (missing in request body)" }, { status: 400 });
     }
 
-    if (newPassword.length < 6) {
-      return NextResponse.json({ success: false, message: "New password must be at least 6 characters" }, { status: 400 });
+    if (newPassword.length < 8) {
+      return NextResponse.json({ success: false, message: "New password must be at least 8 characters" }, { status: 400 });
     }
 
     // Hash the raw token sent from frontend to match the stored hash

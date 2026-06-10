@@ -849,7 +849,7 @@ export default async function SalonPublicPage({ params }: any) {
                   href="/"
                   className="font-bold text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text hover:from-purple-300 hover:to-pink-300 transition-all"
                 >
-                  TrimSetGo
+                  Innonsh Salonza
                 </Link>
               </div>
             </div>
